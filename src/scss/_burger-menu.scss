@@ -1,0 +1,94 @@
+// 在外面做定位
+@mixin burger-menu($color, $active-color) {
+  $z-index: 9;
+  $width: 33px;
+  height: $width / 24 * 17;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  user-select: none;
+  input {
+    display: block;
+    position: absolute;
+    width: $width;
+    left: calc(50% - #{$width} / 2);
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+    z-index: $z-index;
+    &:checked~div:not(.disable-click) {
+      &::before {
+        opacity: 1;
+        transform: rotate(45deg) scale(.85);
+        background: $active-color;
+      }
+      span {
+        opacity: 0;
+        transform: rotate(0deg) scale(.2, .2);
+      }
+      &::after {
+        transform: rotate(-45deg) scale(.85);
+      }
+    }
+    &:checked~aside {
+      transform: none;
+    }
+    &:checked~label {
+      display: block;
+    }
+  }
+  > div:not(.disable-click) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    z-index: $z-index - 1;
+    &::before, span, &::after {
+      content: "";
+      display: block;
+      width: $width;
+      height: $width / 8;
+      background: $color;
+      border-radius: $width / 16;
+      transform-origin: 0 ($width / 16);
+      transition: all .5s ease-in-out;
+    }
+  }
+  aside {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: $z-index - 2;
+    height: 100vh;
+    background-color: #FFFFFF;
+    padding: 30px;
+    transform-origin: 0% 0%;
+    transform: translate(100%, 0);
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    box-shadow: -1px 0px 3px rgba(0, 0, 0, .2);
+    ul {
+      margin-top: 2rem;
+      list-style: none;
+      -webkit-font-smoothing: antialiased;
+      li {
+        font-size: 1.5rem;
+        padding: 10px 0;
+        a {
+          text-decoration: none;
+          color: #666666;
+        }
+      }
+    }
+  }
+  .disable-click {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: $z-index - 3;
+    background-color: rgba(0, 0, 0, .7);
+  }
+}

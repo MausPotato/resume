@@ -1,0 +1,31 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "some description",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel ./src/index.html",
+    "build": "rm -rf dist && parcel build ./src/index.html --no-cache --no-source-maps --experimental-scope-hoisting"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MausPotato"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cssnano": "^4.1.10",
+    "file-loader": "^4.2.0",
+    "jquery": "^3.4.1",
+    "sass": "^1.23.1",
+    "url-loader": "^2.2.0"
+  },
+  "bugs": {
+    "url": "https://github.com/MausPotato/issues"
+  },
+  "homepage": "https://github.com/MausPotato#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "rimraf": "^3.0.0"
+  }
+}

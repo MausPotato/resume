@@ -1,0 +1,26 @@
+$breakpoints: (
+  'xl': '1280px',
+  'lg': '1024px',
+  'md': '768px',
+  'sm': '480px',
+);
+
+@mixin add-breakpoint($key, $breakpoint) {
+  // todo: validation
+  $breakpoints: map-merge($breakpoints, ($key: $breakpoint)) !global;
+}
+
+@mixin at-breakpoint($key) {
+  @media screen and (max-width: get-breakpoint($key)) {
+    @content;
+  }
+}
+
+@function get-breakpoint($key) {
+  $breakpoint: map-get($breakpoints, $key);
+  @if $breakpoint == null {
+    @error 'Breakpoint not found.';
+  } @else {
+    @return $breakpoint;
+  }
+}
