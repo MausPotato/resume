@@ -18,40 +18,37 @@ function send() {
   });
   if (status) {
     let currentTime = new Date();
-    let queryString = `time=${currentTime.toLocaleString()}&name=${document.querySelector("#name").value}&mail=${document.querySelector("#mail").value}&text=${document.querySelector("#text").value}`;
-    // let data = {
-    //   "time": currentTime.toLocaleString(),
-    //   "name": document.querySelector("#name").value,
-    //   "mail": document.querySelector("#mail").value,
-    //   "text": document.querySelector("#text").value
-    // }
-    makeRequest(queryString);
+    let data = {
+      "time": currentTime.toLocaleString(),
+      "name": document.querySelector("#name").value,
+      "mail": document.querySelector("#mail").value,
+      "text": document.querySelector("#text").value
+    };
+    makeRequest(data);
   }
-}
-
-function toQueryString(data) {
-  let params = [];
-  for (let index in data) {
-    params.push(index + "=" + data.index);
-  }
-  return params.join("&");
 }
 
 let httpRequest;
 function makeRequest(data) {
-  console.log(data);
   httpRequest = new XMLHttpRequest();
   if (!httpRequest) {
     alert('Giving up :( Cannot create an XMLHTTP instance');
     return false;
   }
   httpRequest.onreadystatechange = alertContents;
-  httpRequest.open('GET', `https://script.google.com/macros/s/AKfycbzRS0rz8tThx1RVTffcaGv8i3mz0d1r4HB2z2IWYh7BuE45P7s4/exec?${data}`);
+  httpRequest.open('GET', `https://script.google.com/macros/s/AKfycbzRS0rz8tThx1RVTffcaGv8i3mz0d1r4HB2z2IWYh7BuE45P7s4/exec?${toQueryString(data)}`);
   httpRequest.send();
 }
 
+function toQueryString(data) {
+  let params = [];
+  for (let [key, value] of Object.entries(data)) {
+    params.push(key + "=" + value);
+  }
+  return params.join("&");
+}
+
 function alertContents() {
-  console.log(httpRequest);
   if (httpRequest.readyState === XMLHttpRequest.DONE) {
     if (httpRequest.status === 200) {
       alert("已經收到您的訊息，會盡快回覆:)");
