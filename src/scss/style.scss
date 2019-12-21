@@ -98,7 +98,7 @@ body {
   align-items: center;
   flex-direction: column;
   width: 100%;
-  background: url(../img/P180112_17.39.jpg) center/cover no-repeat;
+  background: url(../img/headerbg.jpg) center/cover no-repeat;
   background-attachment: fixed;
   &::after {
     content: "";
@@ -294,7 +294,12 @@ body {
 #about {
   .row {
     flex-wrap: wrap;
-    img {
+    .myself {
+      &::before {
+        content: "";
+        padding-bottom: 100%;
+      }
+      background: url(../img/myself.jpg) top center/cover no-repeat;
       border-radius: 50%;
       border: .5rem solid #FFFCE5;
     }
@@ -463,7 +468,7 @@ body {
   }
   .git {
     &::before {
-      background: url(../img/Git-Icon-1788C.png) center/contain no-repeat;
+      background: url(../img/Git-Icon.png) center/contain no-repeat;
     }
   }
   p {
@@ -518,8 +523,11 @@ body {
     .profile {
       background: url(../img/profile.png) center/contain no-repeat;
     }
+    .responsive {
+      background: url(../img/responsive.png) center/contain no-repeat;
+    }
     .google-extension {
-      background: url(../img/freecell.png) center/contain no-repeat;
+      background: url(../img/googleExtension.png) center/contain no-repeat;
     }
     .mp3player {
       background: url(../img/mp3player.png) center/contain no-repeat;
